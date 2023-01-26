@@ -1,0 +1,99 @@
+
+<!DOCTYPE HTML>
+<html lang="en-US">
+
+<head>
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////     SCRIPTS AND LIBRARYS -->
+
+  <meta charset="UTF-8">
+  <title>BarCode-inator</title>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="JsBarcode.all.min.js"></script>            <!-- Import the JsBarcode script to generate the barcode, in this occasion is the format code 128-->
+                        <!-- The script can be changed, the other formats are inside the folder "JsBarcode-master" 
+                          Ex: <script src="JsBarcode-master/CODE39.js"></script>  -->
+
+<!--      JsBarcode Library used in this project was created by Johan Lindell (johan@lindell.me) http://lindell.github.io/JsBarcode/-->
+
+  <h1>BARCODE-INATOR 3000</h1>
+
+</head>
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////     VISUALS -->
+
+<style type="text/css">
+
+  h1, div, aside, button, input{
+    display: block;
+    margin: 1rem auto;
+    text-align: center;
+  }
+  /* Center the element's position */
+
+  @media print {
+  /* Set the printing in visual */
+
+    body * {
+      display: none;
+    }
+    /* Set the body elements as no displayed, so they don't get printed */
+  
+    .print-area, .print-area * {
+      display: block;
+    }
+    /* Set Printing Area */
+  }
+
+</style>
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////   PAGE ELEMENTS -->
+
+<body> 
+
+  <hr>
+    <div class="print-area">
+      <canvas id="barcode"></canvas>                    <!-- BarCode's drawing area -->
+    </div>
+  <hr>
+
+  <div>Ingrese un valor:</div>
+  <input type="text" id="valcon" value="A1B2C3D4">      <!-- BarCode value read -->
+
+  <button id="Descargar">Descargar</button>
+  <button id="btnImprimir">Imprimir</button>
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////     BARCODE GENERATOR -->
+
+  <script>
+    var refresh = function(){
+      $valcon = $('#valcon').val();                             // BarCode value read 
+      $(document).ready(function(){
+        $("#barcode").JsBarcode($valcon,{displayValue:true,fontSize:20});      // Calls JsBarcode function Code 128 with the values
+      }); 
+      };
+      setInterval(refresh,1000);                                // Set a time interval to repeat the function
+      refresh();                                                // Function Start
+
+     ////////////////////////////////////////////////////////////////////////////////////////////////////////   DOWNLOAD
+
+    $(function(){
+      var canvas=document.getElementById("barcode");      // Get the BarCode canvas into a new variable
+      function download_file(){                           // Download function
+        var link = document.createElement('a');
+        link.download = 'BarCode_'+$valcon+'.png';          // Set the image name
+        link.href = document.getElementById('barcode').toDataURL()
+        link.click();
+      }
+      $("#Descargar").click(function(){ download_file(); });      // Download button listener
+    });
+    
+     ////////////////////////////////////////////////////////////////////////////////////////////////////////   PRINT
+
+    document.getElementById('btnImprimir').addEventListener('click', () => { window.print() });      // Print button listener
+    
+    </script>
+
+</body>
+
+</html>
+
