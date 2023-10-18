@@ -6,6 +6,8 @@ This project develop is focus on **Generate BarCodes in Web systems** with HTML 
 >The test of this project was done with: [**Zebra ZD220 Transfer Desktop Printer**](https://www.zebra.com/us/en/support-downloads/printers/desktop/ZD200t.html) with USB conection inside a **Windows 11** operating system and a **Android** smartphone. 
 >Future test with **Zebra ZT230** are expected.
 
+>[**TEST**](https://cutrusupv.000webhostapp.com/Ticket/BarCodeInator/index.html)
+
 ![Test](Label2.png "Test")
 
 ## Previous Configuration
